@@ -20,13 +20,14 @@ dataframe = pd.read_csv(
 )
 
 # We have a limited budget, therefore we would like to exclude
-# listings with a price above 100 pounds per night
-dataframe = dataframe[dataframe["Price"] <= 100]
+# listings with a price above currency_limit MXN per night
+currency_limit = 5000   # Price in MXN
+dataframe = dataframe[dataframe["Price"] <= currency_limit]
 
 # Display as integer
 dataframe["Airbnb Listing ID"] = dataframe["Airbnb Listing ID"].astype(int)
 # Round of values
-dataframe["Price"] = "£ " + dataframe["Price"].round(2).astype(str) # <--- CHANGE THIS POUND SYMBOL IF YOU CHOSE CURRENCY OTHER THAN POUND
+dataframe["Price"] = "$ " + dataframe["Price"].round(2).astype(str) 
 # Rename the number to a string
 dataframe["Location"] = dataframe["Location"].replace(
     {1.0: "To visit", 0.0: "Airbnb listing"}
